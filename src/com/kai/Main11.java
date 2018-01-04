@@ -36,6 +36,7 @@ public class Main11 {
                 return false;
             }
         };*/
+        //Predicate<T> -T作为输入，返回的boolean值作为输出
         Predicate<String> predicate = s -> s.length() > 0;
         //返回true
         System.out.println(predicate.test("foo"));

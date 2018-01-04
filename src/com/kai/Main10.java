@@ -33,13 +33,12 @@ interface PersonFactory<P extends Person> {
 class Man extends Person {
 
     Man(String name, String age) {
-        super.age=age;
-        super.name=name;
+        super(name,age);
     }
 }
 
 class Person {
-    String name, age;
+    private String name, age;
 
     Person() {
 
@@ -64,5 +63,13 @@ class Person {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", age='" + age + '\'' +
+                '}';
     }
 }
