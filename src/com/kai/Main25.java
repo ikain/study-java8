@@ -20,19 +20,55 @@ public class Main25 {
         StringBuilder temp = new StringBuilder();//获取fastdfs域名
         StringBuilder path = new StringBuilder("https://zwydemo.zhixueyun.com/");//获取fastdfs域名
         path.append("default/M00/00/04/ClFE3Fr5TEeANkK1AAnM9CVLyfI219.jpg");//获取相对路径,并且组装成路径
-        BufferedImage imge = getPic("学员A", "班级名称XXXXXXX", "组织名称X", temp, path, "2018100010");
+        BufferedImage imge = getPic("学员A", "中大院测试中大院DSSSSSSSSSSSSSSSSA@##$@$广泛的鬼画符恢复换个风格回复", "组织名称X", temp, path, "2018100010");
         warrpData(imge);
     }
 
+    static int isCnorEn(char c) {
+        if (c >= 0x0391 && c <= 0xFFE5) //中文字符
+            return 1;
+        if (c >= 0x0000 && c <= 0x00FF) { //英文字符
+            return 2;
+        }
+        return 3;
+    }
+
     private static BufferedImage getPic(String name, String clzName, String orgName, StringBuilder temp, StringBuilder path, String num) {
+
+        String allStr = "您完成了“" + clzName + "”的班级培训,经审核。准予颁发班级结业证书！";
+        char[] charsName = allStr.toCharArray();
+        int maxLen = 900;
+        int realLen = 0;
+        int chineseSize = 0;
+        int englishSize = 0;
+        int otherSize = 0;
+        for (char aCharsName : charsName) {
+            if (realLen > maxLen)
+                break;
+            int type = isCnorEn(aCharsName);
+            switch (type) {
+                case 1:
+                    chineseSize++;
+                    realLen += 25;
+                    continue;
+                case 2:
+                    englishSize++;
+                    realLen += 14;
+                    continue;
+                case 3:
+                    otherSize++;
+                    realLen += 14;
+            }
+        }
+
         try {
-            int fristX = 180 + 80;
+            int fristX = 180 + 20;
             int fristY = 510 - 50;
-            int rowSize = 50;
-            int headX = 150 + 80;
+            int rowSize = chineseSize + englishSize + otherSize;
+            int headX = 150 + 20;
             int headY = 470 - 50;
 
-            int floorX = 750 + 80;
+            int floorX = 750 + 50;
             //File file =  ResourceUtils.getFile("file:simhei.ttf") ;
             //logger.info("文件：{},存在：{}" ,file.getAbsoluteFile(),file.exists() );
             InputStream stream = Main25.class.getClassLoader().getResourceAsStream("./com/kai/simhei.ttf");
